@@ -1,5 +1,6 @@
 console.log('destructing  app');
 
+// Obect
 const person = {
     name: 'Gokul',
     age: 28,
@@ -32,3 +33,14 @@ const { name: publisherName = 'Self-published' } = book.publisher;
 
 
 console.log(publisherName);
+
+
+
+///Array
+
+const item = ['Coffee (hot)', '$2.0', '$2.5', '$2.75'];
+
+const [itemName, , , price3 ] = item;
+
+console.log(`A medium ${itemName} costs ${price3}.`);
+
