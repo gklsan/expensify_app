@@ -26,24 +26,35 @@ store.subscribe(() => {
 });
 
 
-store.dispatch({
+const incrementCount = ({ incrementBy = 1 } = {}) => ({
     type: 'INCREMENT',
-    incrementBy: 5
+    incrementBy
 });
 
-store.dispatch({ type: 'INCREMENT'});
 
-store.dispatch({ type: 'RESET' });
-
-store.dispatch({
+const decrementCount = ({ decrementBy = 1} = {}) => ({
     type: 'DECREMENT',
-    decrementBy: 10
+    decrementBy
 });
 
-store.dispatch({ type: 'DECREMENT'});
+const resetCount = () => ({
+    type: 'RESET'
+});
 
-
-store.dispatch({
+const setCount = ({count = 0}) => ({
     type: 'SET',
-    count: 101
+    count
 })
+
+store.dispatch(incrementCount({ incrementBy: 15}));
+store.dispatch(incrementCount());
+
+store.dispatch(decrementCount({ decrementBy: 5 }));
+store.dispatch(decrementCount());
+
+store.dispatch(resetCount());
+
+store.dispatch(incrementCount());
+store.dispatch(incrementCount());
+
+store.dispatch(setCount({count: 100}));
