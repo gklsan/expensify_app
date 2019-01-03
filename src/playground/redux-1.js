@@ -4,7 +4,7 @@ import { createStore } from 'redux';
 
 const getValue = (value = 1) => (typeof value === 'number' && value) || 1;
 
-const store = createStore((state = { count: 0 }, action) => {
+const countReducer = (state = { count: 0 }, action) => {
     switch(action.type){
         case 'INCREMENT':
             const incrementBy = getValue(action.incrementBy);
@@ -17,9 +17,10 @@ const store = createStore((state = { count: 0 }, action) => {
         case 'SET':
             return {count: (action.count || state.count) };
         default:
-            return state
+            return state;
     }
-});
+}
+const store = createStore(countReducer);
 
 store.subscribe(() => {
     console.log(store.getState());
