@@ -1,5 +1,6 @@
 console.log('redux-expensify.js......');
 import { createStore, combineReducers } from 'redux';
+import uuid from 'uuid';
 
 const demoState = {
     expenses: [{
@@ -23,12 +24,25 @@ const expensesReducerDefaultState = [];
 
 const expensesReducer = (state = expensesReducerDefaultState, action) => {
     switch (action.type) {
+        case 'ADD_EXPENSE':
+            return [...state, action.expense];
         default:
             return state;
 
     }
 
 };
+
+const addExpense = ({ description = '', note = '', amount = 0, createdAt = 0 } = {}) => ({
+    type: 'ADD_EXPENSE',
+    expense: {
+        id: uuid(),
+        description,
+        note,
+        amount,
+        createdAt
+    }
+});
 
 
 //Filter reducer
@@ -57,5 +71,12 @@ const store = createStore(
         filters: filtersReducer
     })
 );
+
+
+
+console.log(store.getState());
+
+store.dispatch(addExpense({ description: 'test', note: 'test', amount: 3000}));
+store.dispatch(addExpense({ description: 'test1', note: 'test1', amount: 5000}));
 
 console.log(store.getState());

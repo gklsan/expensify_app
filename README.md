@@ -6,3 +6,6 @@
 #### Adding redux
     yarn add redux@4.0.1
            
+#### Add UUID
+    yarn add uuid@3.3.2
+    
