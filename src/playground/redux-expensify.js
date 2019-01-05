@@ -26,6 +26,8 @@ const expensesReducer = (state = expensesReducerDefaultState, action) => {
     switch (action.type) {
         case 'ADD_EXPENSE':
             return [...state, action.expense];
+        case 'REMOVE_EXPENSE':
+            return state.filter(({ id }) => id !== action.id );
         default:
             return state;
 
@@ -44,6 +46,11 @@ const addExpense = ({ description = '', note = '', amount = 0, createdAt = 0 } =
     }
 });
 
+
+const removeExpense = ({ id }) => ({
+    type: 'REMOVE_EXPENSE',
+    id
+});
 
 //Filter reducer
 
@@ -76,7 +83,12 @@ const store = createStore(
 
 console.log(store.getState());
 
-store.dispatch(addExpense({ description: 'test', note: 'test', amount: 3000}));
-store.dispatch(addExpense({ description: 'test1', note: 'test1', amount: 5000}));
+const exp1 = store.dispatch(addExpense({ description: 'test', note: 'test', amount: 3000}));
+const exp2 = store.dispatch(addExpense({ description: 'test1', note: 'test1', amount: 5000}));
+console.log('exp2', exp2.expense.id);
+
+console.log(store.getState());
+
+store.dispatch(removeExpense({ id: exp2.expense.id }));
 
 console.log(store.getState());
