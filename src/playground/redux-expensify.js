@@ -92,3 +92,12 @@ console.log(store.getState());
 store.dispatch(removeExpense({ id: exp2.expense.id }));
 
 console.log(store.getState());
+
+
+const user = {
+    name: 'Gokul',
+    age: 20
+};
+
+
+console.log({...user, location: 'Muthur', age: 27});
