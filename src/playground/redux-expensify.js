@@ -117,12 +117,12 @@ const setTextFilter = (text = '') => ({
 
 });
 
-const sortByAmount = (amount = 500) => ({
+const sortByAmount = (amount) => ({
     type: 'SORT_BY_AMOUNT',
-    sortBy:amount
+    sortBy: amount
 });
 
-const sortByDate = (date = '') => ({
+const sortByDate = (date) => ({
     type: 'SORT_BY_DATE',
     sortBy: date
 });
@@ -154,6 +154,12 @@ const getVisibleExpanses = (expesense, { text, sortBy, startDate, endDate }) => 
         const textMatch = expense.description.toLowerCase().includes(text.toLowerCase());
 
         return startDateMatch && endDateMatch && textMatch;
+    }).sort((a, b) => {
+        if(sortBy == 'date') {
+            return (a.createdAt < b.createdAt) ? 1 : -1;
+        } else if(sortBy == 'amount') {
+            return(a.amount < b.amount) ?  1 : -1
+        }
     })
 };
 
@@ -161,6 +167,7 @@ store.subscribe(() => {
     const state = store.getState();
     const visibleExpense = getVisibleExpanses(state.expenses, state.filters);
     console.log(visibleExpense);
+    console
 });
 
 const exp1 = store.dispatch(addExpense({ description: 'Rent', note: 'Rent', amount: 3000, createdAt: 1000}));
@@ -174,8 +181,8 @@ store.dispatch(editExpense(exp2.expense.id, { amount: 4000 }));
 store.dispatch(setTextFilter('coffee'));
 store.dispatch(setTextFilter());
 
-store.dispatch(sortByAmount());
-store.dispatch(sortByDate());
+store.dispatch(sortByAmount('amount'));
+store.dispatch(sortByDate('date'));
 
 store.dispatch(setStartDate(200));
 store.dispatch(setStartDate());
