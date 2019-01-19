@@ -140,7 +140,6 @@ const setEndDate = (endDate) => ({
 
 
 // store creation
-
 const store = createStore(
     combineReducers({
         expenses: expensesReducer,
@@ -148,37 +147,36 @@ const store = createStore(
     })
 );
 
+const getVisibleExpanses = (expesense, { text, sortBy, startDate, endDate }) => {
+    return expesense.filter((expense) => {
+        const startDateMatch = typeof startDate !== 'number' || expense.createdAt > startDate;
+        const endDateMatch = typeof endDate !== 'number' || expense.createdAt < endDate ;
+        const textMatch = expense.description.toLowerCase().includes(text.toLowerCase());
 
+        return startDateMatch && endDateMatch && textMatch;
+    })
+};
 
-console.log(store.getState());
+store.subscribe(() => {
+    const state = store.getState();
+    const visibleExpense = getVisibleExpanses(state.expenses, state.filters);
+    console.log(visibleExpense);
+});
 
-const exp1 = store.dispatch(addExpense({ description: 'Rent', note: 'Rent', amount: 3000}));
-const exp2 = store.dispatch(addExpense({ description: 'Coffee', note: 'Coffee', amount: 5000}));
-console.log('exp2', exp2.expense.id);
+const exp1 = store.dispatch(addExpense({ description: 'Rent', note: 'Rent', amount: 3000, createdAt: 1000}));
 
-console.log(store.getState());
+const exp2 = store.dispatch(addExpense({ description: 'Coffee', note: 'Coffee', amount: 5000, createdAt: -1000}));
 
-store.dispatch(removeExpense({ id: exp1.expense.id }));
+// store.dispatch(removeExpense({ id: exp1.expense.id }));
 
 store.dispatch(editExpense(exp2.expense.id, { amount: 4000 }));
 
-store.dispatch(setTextFilter('rent'));
+store.dispatch(setTextFilter('coffee'));
 store.dispatch(setTextFilter());
 
 store.dispatch(sortByAmount());
 store.dispatch(sortByDate());
 
-store.dispatch(setStartDate(125));
+store.dispatch(setStartDate(200));
 store.dispatch(setStartDate());
-store.dispatch(setEndDate(500));
-
-console.log(store.getState());
-
-
-const user = {
-    name: 'Gokul',
-    age: 20
-};
-
-
-console.log({...user, location: 'Muthur', age: 27});
+store.dispatch(setEndDate(999));
