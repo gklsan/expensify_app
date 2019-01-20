@@ -46,6 +46,7 @@ const expensesReducer = (state = expensesReducerDefaultState, action) => {
 
 };
 
+//Add expenses
 const addExpense = ({ description = '', note = '', amount = 0, createdAt = 0 } = {}) => ({
     type: 'ADD_EXPENSE',
     expense: {
@@ -57,20 +58,52 @@ const addExpense = ({ description = '', note = '', amount = 0, createdAt = 0 } =
     }
 });
 
-
+// Remove expenses
 const removeExpense = ({ id }) => ({
     type: 'REMOVE_EXPENSE',
     id
 });
 
+// Edit expenses
 const editExpense = (id, updates) => ({
     type: 'EDIT_EXPENSE',
     id,
     updates
 });
 
-//Filter reducer
+// Set text filter
+export const setTextFilter = (text = '') => ({
+    type: 'SET_TEXT_FILTER',
+    text
 
+});
+
+// Sort by amount
+export const sortByAmount = (amount) => ({
+    type: 'SORT_BY_AMOUNT',
+    sortBy: amount
+});
+
+// Sort by date
+export const sortByDate = (date) => ({
+    type: 'SORT_BY_DATE',
+    sortBy: date
+});
+
+// Set start date
+export const setStartDate = (startDate) => ({
+    type: 'SET_START_DATE',
+    startDate
+});
+
+// Set end date
+export const setEndDate = (endDate) => ({
+    type: 'SET_END_DATE',
+    endDate
+});
+
+
+//Filter reducer
 const filtersReducerDefaultState = {
     text: '',
     sortBy: 'amount',
@@ -84,7 +117,7 @@ const filtersReducer = (state = filtersReducerDefaultState, action) => {
             return {
                 ...state,
                 text: action.text
-            }
+            };
         case 'SORT_BY_AMOUNT':
             return {
                 ...state,
@@ -110,34 +143,6 @@ const filtersReducer = (state = filtersReducerDefaultState, action) => {
 
     }
 };
-
-const setTextFilter = (text = '') => ({
-    type: 'SET_TEXT_FILTER',
-    text
-
-});
-
-const sortByAmount = (amount) => ({
-    type: 'SORT_BY_AMOUNT',
-    sortBy: amount
-});
-
-const sortByDate = (date) => ({
-    type: 'SORT_BY_DATE',
-    sortBy: date
-});
-
-
-const setStartDate = (startDate) => ({
-    type: 'SET_START_DATE',
-    startDate
-});
-
-const setEndDate = (endDate) => ({
-    type: 'SET_END_DATE',
-    endDate
-});
-
 
 // store creation
 const store = createStore(
