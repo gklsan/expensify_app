@@ -10,4 +10,7 @@
     yarn add uuid@3.3.2
     
 #### Object spread operator
-    yarn add babel-plugin-transform-object-rest-spread@6.26.0    
+    yarn add babel-plugin-transform-object-rest-spread@6.26.0
+    
+### react-redux
+    yarn add react-redux@6.0.0        

@@ -1,6 +1,6 @@
 const path = require('path');
-// const entryPath = './src/app.js';
-const entryPath = './src/playground/hoc.js';
+const entryPath = './src/app.js';
+// const entryPath = './src/playground/hoc.js';
 const publicDirPath = path.join(__dirname, 'public');
 
 module.exports = {
