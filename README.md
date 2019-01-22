@@ -13,4 +13,9 @@
     yarn add babel-plugin-transform-object-rest-spread@6.26.0
     
 ### react-redux
-    yarn add react-redux@6.0.0        
+    yarn add react-redux@6.0.0    
+
+### moment js and react-dates     
+    yarn add moment@2.24.0 react-dates@18.4.0    
+    
+    

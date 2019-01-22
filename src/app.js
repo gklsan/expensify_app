@@ -9,17 +9,16 @@ import { addExpense } from "./actions/expenses";
 import { setTextFilter } from "./actions/filters";
 import { Provider } from 'react-redux';
 
-
 const store = configureStroe();
 
 store.dispatch(addExpense({description: 'Water bill', note: 'this is water bill ', createdAt: 2000, amount:3000 }));
 store.dispatch(addExpense({description: 'Gas bill', note: 'this is gas bill ', createdAt: 1000, amount:4500 }));
 store.dispatch(addExpense({description: 'Rent', note: 'this is rent bill ', createdAt: 2000, amount:10900 }));
-store.dispatch(setTextFilter('water'));
-
-setTimeout(() => {
-    store.dispatch(setTextFilter('bill'));
-}, 3000);
+// store.dispatch(setTextFilter('water'));
+//
+// setTimeout(() => {
+//     store.dispatch(setTextFilter('bill'));
+// }, 3000);
 
 const state = store.getState();
 const expenses = getVisibleExpenses(state.expenses, state.filters);
