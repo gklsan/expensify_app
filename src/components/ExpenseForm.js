@@ -9,14 +9,19 @@ import 'react-dates/lib/css/_datepicker.css';
 const now = moment();
 console.log(now.format('MM Do, YYYY'));
 export default class ExpenseForm extends React.Component {
-    state = {
-        description: '',
-        note: '',
-        amount: 0,
-        createdAt: moment(),
-        calenderFocused: false,
-        error: undefined
-    };
+    constructor(props){
+        super(props)
+        console.log('ExpenseForm', props.expense);
+        const expense = props.expense;
+        this.state = {
+            description: (expense && expense.description) || '',
+            note: (expense && expense.note) || '',
+            amount: (expense && (expense.amount/100).toString()) || 0,
+            createdAt: (expense && moment(expense.createdAt)) || moment(),
+            calenderFocused: false,
+            error: undefined
+        }
+    }
     onDescriptionChange = (e) => {
         const description = e.target.value;
         this.setState(() => ({description}))
