@@ -18,4 +18,5 @@
 ### moment js and react-dates     
     yarn add moment@2.24.0 react-dates@18.4.0    
     
-    
+### adding Jest
+    yarn add jest@23.6.0    
